@@ -23,12 +23,12 @@ b. Delete container after use:
 </br>
 
 ##### **Test Install** 
-1. Start Container: 
-    > `Open terminal: ctrl+shift+t`  
-    > `docker start <custom_name>`
-2. Attach to shell 1 and run publisher:
+1. Open 2 Terminals:
+    > `ctrl+shift+t (x2)`   
+2. From terminal 1 - start container, attach, and run publisher:
+    > `docker start <custom_name>`  
     > `docker attach <custom_name>`  
-    > `ros2 run demo_nodes_cpp talker`
-3. Attach to shell 2 and run subscriber:
+    > `ros2 run demo_nodes_cpp talker`  
+3. From terminal 2 - attach new shell and run subscriber:
     > `docker exec -it <custom_name> bash`  
-    > `ros2 run demo_nodes_py listener`
+    > `ros2 run demo_nodes_py listener`  
