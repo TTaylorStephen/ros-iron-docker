@@ -12,7 +12,7 @@ deps="
     "
 
 # install apt dependencies 
-printf "\n${LYLW}Installating Dependencies with apt-get ${NC}\n\n"
+printf "\n${YLW}Installating Dependencies with apt-get ${NC}\n\n"
 apt-get update && apt-get upgrade -y
 for pkg in $deps; do 
     apt-get install -y $pkg

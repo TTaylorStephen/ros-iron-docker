@@ -4,7 +4,7 @@ LRED="\e[91m" LGRN="\e[92m" LYLW="\e[93m" LBLU="\e[94m" LMAG="\e[95m" LCYAN="\e[
 
 
 ########## Set up default locale configuration ##########
-printf "\n${LYLW}Setting up Location ${NC}\n\n" 
+printf "\n${YLW}Setting up Location ${NC}\n\n" 
 locale-gen en_US en_US.UTF-8
 update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 export LANG=en_US.UTF-8
@@ -13,7 +13,7 @@ printf "\n${LGRN}Location Set ${NC}\n\n"
 
 
 ########## Ensure Ubuntu Universe Repo Setup ##########
-printf "\n${LYLW}Setting up Ubuntu Universe Repo... ${NC}\n\n" 
+printf "\n${YLW}Setting up Ubuntu Universe Repo... ${NC}\n\n" 
 apt-get update 
 add-apt-repository universe
 if [[ $? -eq 0 ]]; then
@@ -25,7 +25,7 @@ fi
 
 
 ########## Configure Ros Libs and Install ##########
-printf "\n${LYLW}Installing ROS... ${NC}\n\n"
+printf "\n${YLW}Installing ROS... ${NC}\n\n"
 curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg   # add ros2 GPG key 
 
 if [[ $? -eq 0 ]]; then 
@@ -53,14 +53,14 @@ fi
 ########## Send auto source to .bashrc for ros environement ########## 
 echo 'source /opt/ros/iron/setup.bash' >> .bashrc
 if [[ $? -eq 0 ]]; then 
-    printf "\n${LGRN}Environment Configured \n\n"   
+    printf "\n${LGRN}Environment Configured${NC} \n\n"   
 else
     printf "\n${RED}Failed to Configure Environment. Exiting... ${NC}\n\n"  
     exit 1
 fi
 
 
-printf "\n${YLW}$pkg ROS Installation Successful!${NC}\n\n"
+printf "\n${LYLW}ROS Installation Successful!${NC}\n\n"
 
 
 

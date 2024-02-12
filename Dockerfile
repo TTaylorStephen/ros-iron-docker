@@ -10,6 +10,7 @@
 ## TO RUN:                                                ##
 ##                                                        ##
 ## docker compose up -d                                   ##
+## docker exec -it <container> bash                       ##
 ##                                                        ##
 ## docker run -it --name=steve0 container:tag bash        ##
 ## docker run -it --rm --name=steveO container:tag bash   ##
@@ -33,9 +34,9 @@ WORKDIR /home/$UNAME
 COPY setup/deps.install setup/
 RUN setup/deps.install
 
-# # Install ROS via: https://docs.ros.org/en/iron/Installation/Ubuntu-Install-Debians.html
-# COPY setup/ros.install setup/
-# RUN setup/ros.install
+# Install ROS via: https://docs.ros.org/en/iron/Installation/Ubuntu-Install-Debians.html
+COPY setup/ros.install setup/
+RUN setup/ros.install
 
 # run entry point stuff 
 COPY setup/entrypoint setup/
