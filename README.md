@@ -2,7 +2,7 @@
 
 **Builds Ubuntu 22.04 with ROS 2 Iron Irwini Installed**
 
-### Linux Usage:
+## Linux:
  
 ##### **Build Image**                                              
                                                       
@@ -24,11 +24,11 @@ b. Delete container after use:
 
 ##### **Test Install** 
 1. Start Container: 
-    > `Open terminal: ctrl+shift+t`
+    > `Open terminal: ctrl+shift+t`  
     > `docker start <custom_name>`
 2. Attach to shell 1 and run publisher:
-    > `docker attach <custom_name>`
+    > `docker attach <custom_name>`  
     > `ros2 run demo_nodes_cpp talker`
 3. Attach to shell 2 and run subscriber:
-    > `docker exec -it <custom_name> bash`
+    > `docker exec -it <custom_name> bash`  
     > `ros2 run demo_nodes_py listener`
