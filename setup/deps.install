@@ -1,0 +1,29 @@
+#!/bin/bash
+RED="\e[31m" GRN="\e[32m" YLW="\e[33m" BLU="\e[34m" MAG="\e[35m" CYAN="\e[36m" LGRY="\e[37m" GRY="\e[90m"
+LRED="\e[91m" LGRN="\e[92m" LYLW="\e[93m" LBLU="\e[94m" LMAG="\e[95m" LCYAN="\e[96m" WHITE="\e[97m" NC="\e[0m"
+
+
+# list apt dependencies 
+deps=" 
+    sudo 
+    locales   
+    curl
+    software-properties-common
+    "
+
+# install apt dependencies 
+printf "\n${LYLW}Installating Dependencies with apt-get ${NC}\n\n"
+apt-get update && apt-get upgrade -y
+for pkg in $deps; do 
+    apt-get install -y $pkg
+    if [[ $? -eq 0 ]]; then
+        printf "\n${LGRN}$pkg Installation SUCCESSFUL ${NC}\n\n"
+    else 
+        printf "\n${RED}$pkg Installation FAILED. Exiting... ${NC} \n\n"
+        exit 1
+    fi
+done
+
+
+
+

@@ -1,0 +1,8 @@
+version: “3”
+services:
+  ubuntu:
+    container_name: steve0
+    image: ros-2-iron
+    stdin_open: true
+    tty: true
+    

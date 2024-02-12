@@ -1,0 +1,66 @@
+#!/bin/bash
+RED="\e[31m" GRN="\e[32m" YLW="\e[33m" BLU="\e[34m" MAG="\e[35m" CYAN="\e[36m" LGRY="\e[37m" GRY="\e[90m"
+LRED="\e[91m" LGRN="\e[92m" LYLW="\e[93m" LBLU="\e[94m" LMAG="\e[95m" LCYAN="\e[96m" WHITE="\e[97m" NC="\e[0m"
+
+
+########## Set up default locale configuration ##########
+printf "\n${LYLW}Setting up Location ${NC}\n\n" 
+locale-gen en_US en_US.UTF-8
+update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+export LANG=en_US.UTF-8
+locale
+printf "\n${LGRN}Location Set ${NC}\n\n" 
+
+
+########## Ensure Ubuntu Universe Repo Setup ##########
+printf "\n${LYLW}Setting up Ubuntu Universe Repo... ${NC}\n\n" 
+apt-get update 
+add-apt-repository universe
+if [[ $? -eq 0 ]]; then
+    printf "\n${LGRN}Ubuntu Universe Repo Configured Successfully ${NC}\n\n" 
+else
+    printf "\n${RED}Failed to Configure Ubuntu Universe Repo. Exiting... ${NC}\n\n" 
+    exit 1
+fi
+
+
+########## Configure Ros Libs and Install ##########
+printf "\n${LYLW}Installing ROS... ${NC}\n\n"
+curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg   # add ros2 GPG key 
+
+if [[ $? -eq 0 ]]; then 
+    # add ros repo to /etc/apt/sources.list.d
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+    apt-get update && apt-get upgrade
+
+    # install ros libs 
+    ros_deps="ros-iron-desktop ros-dev-tools"
+    for pkg in $ros_deps; do 
+        DEBIAN_FRONTEND=noninteractive apt-get install -y $pkg
+        if [[ $? -eq 0 ]]; then
+            printf "\n${LGRN}$pkg Installation SUCCESSFUL ${NC}\n\n"
+        else 
+            printf "\n${RED}$pkg Installation FAILED. Exiting... ${NC}\n\n"
+            exit 1
+        fi
+    done
+else 
+    printf "\n${RED}Failed to Configure ROS Repositories. Exiting... ${NC}\n\n" 
+    exit 1
+fi
+
+
+########## Send auto source to .bashrc for ros environement ########## 
+echo 'source /opt/ros/iron/setup.bash' >> .bashrc
+if [[ $? -eq 0 ]]; then 
+    printf "\n${LGRN}Environment Configured \n\n"   
+else
+    printf "\n${RED}Failed to Configure Environment. Exiting... ${NC}\n\n"  
+    exit 1
+fi
+
+
+printf "\n${YLW}$pkg ROS Installation Successful!${NC}\n\n"
+
+
+
