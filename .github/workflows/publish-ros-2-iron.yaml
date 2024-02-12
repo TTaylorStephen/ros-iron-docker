@@ -11,6 +11,6 @@ jobs:
       - name: Build and push the image
         run: |
           docker login --username ttaylorstephen --password ${{secrets.CI_PAT}} ghcr.io
-          docker --build-arg UNAME=git_ci --build-arg PWORD=git_ci -t ghcr.io/ttaylorstephen/ros-iron-base:latest .
+          docker build --build-arg UNAME=git_ci --build-arg PWORD=git_ci -t ghcr.io/ttaylorstephen/ros-iron-base:latest .
           docker push ghcr.io/ttaylorstephen/ros-iron-base:latest
 
