@@ -1,0 +1,20 @@
+name: Docker Image CI for ros-2-iron
+
+on: 
+  push
+
+jobs:
+  ros2base:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and push the image
+        run: |     
+          dirs=($(ls | grep ros))
+          docker login --username ttaylorstephen --password ${secrets.CI_PAT} ghcr.io 
+          for pkg in $dirs; do
+              docker build --build-arg UNAME=git_ci --build-arg PWORD=git_ci -t ghcr.io/ttaylorstephen/$pkg:latest .
+              docker push ghcr.io/ttaylorstephen/$pkg:latest
+          done;
+
+  # ros2nano:

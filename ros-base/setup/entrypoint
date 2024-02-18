@@ -3,8 +3,6 @@ RED="\e[31m", GRN="\e[32m", YLW="\e[33m", BLU="\e[34m", MAG="\e[35m", CYAN="\e[3
 LRED="\e[91m", LGRN="\e[92m", LYLW="\e[93m", LBLU="\e[94m", LMAG="\e[95m", LCYAN="\e[96m", WHITE="\e[97m", NC="\e[0m"
 
 
-printf "${YLW}\nOpening ROS Container${NC}\n\n"
-
 ## add stuff here if you want custom startup behavior 
 # does nothing atm except pass the bash shell 
 

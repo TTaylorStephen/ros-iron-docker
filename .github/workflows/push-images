@@ -1,0 +1,10 @@
+#!/bin/bash
+
+dirs=($(find . -type d --name 'ros*'))
+for pkg in "${dirs[@]}"; do
+    ls ;
+    # cd $pkg && 
+    # docker login --username ttaylorstephen --password ${{secrets.CI_PAT}} ghcr.io 
+    # docker build --build-arg UNAME=git_ci --build-arg PWORD=git_ci -t ghcr.io/ttaylorstephen/ros-iron-base:latest .
+    # docker push ghcr.io/ttaylorstephen/ros-iron-base:latest
+done;

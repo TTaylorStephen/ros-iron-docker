@@ -59,6 +59,8 @@ else
     exit 1
 fi
 
+chown -R $UNAME:$UNAME /home/$UNAME      # configure home directory
+chmod 755 -R /home/$UNAME  
 
 printf "\n${LYLW}ROS Installation Successful!${NC}\n\n"
 

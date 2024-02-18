@@ -1,0 +1,14 @@
+version: “3”
+services:
+  ros-nano:
+    container_name: steve0
+    image: ros-nano
+    stdin_open: true
+    tty: true
+    privileged: true
+    environment:
+      DISPLAY: $DISPLAY
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ~/.Xauthority:/root/.Xauthority
+    
