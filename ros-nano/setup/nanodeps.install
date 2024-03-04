@@ -7,9 +7,10 @@ ls
 pwd
 # list apt dependencies 
 deps=" 
-    git-core cmake freeglut3-dev 
+    git-core apt-utils cmake freeglut3-dev 
     pkg-config build-essential libxmu-dev 
-    libxi-dev libusb-1.0-0-dev
+    libxi-dev libusb-1.0-0-dev liblog4cxx-dev
+    python3-colcon-common-extensions
     "
 
 # install apt dependencies 

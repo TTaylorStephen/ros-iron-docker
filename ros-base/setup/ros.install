@@ -49,18 +49,7 @@ else
     exit 1
 fi
 
-
-########## Send auto source to .bashrc for ros environement ########## 
-echo 'source /opt/ros/iron/setup.bash' >> .bashrc
-if [[ $? -eq 0 ]]; then 
-    printf "\n${LGRN}Environment Configured${NC} \n\n"   
-else
-    printf "\n${RED}Failed to Configure Environment. Exiting... ${NC}\n\n"  
-    exit 1
-fi
-
-chown -R $UNAME:$UNAME /home/$UNAME      # configure home directory
-chmod 755 -R /home/$UNAME  
+apt-get update && apt-get upgrade -y 
 
 printf "\n${LYLW}ROS Installation Successful!${NC}\n\n"
 

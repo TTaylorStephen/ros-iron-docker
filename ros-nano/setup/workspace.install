@@ -1,0 +1,29 @@
+#!/bin/bash
+RED="\e[31m" GRN="\e[32m" YLW="\e[33m" BLU="\e[34m" MAG="\e[35m" CYAN="\e[36m" LGRY="\e[37m" GRY="\e[90m"
+LRED="\e[91m" LGRN="\e[92m" LYLW="\e[93m" LBLU="\e[94m" LMAG="\e[95m" LCYAN="\e[96m" WHITE="\e[97m" NC="\e[0m"
+
+# build ros workspace 
+printf "\n${YLW}Building ROS Workspace..${NC}\n\n"
+apt-get install libfreenect-dev -y
+apt-get update 
+
+# configure environment
+echo '. /opt/ros/iron/setup.bash' >> /home/$UNAME/.bashrc
+
+rosdep init 
+
+
+sudo -i -u $UNAME bash -c "
+                . /home/$UNAME/.bashrc &&
+                cd $ROBO_HOME/ws && rm -rf build/ install/ log/ && ls &&
+                rosdep update &&
+                sudo -i -u rosdep install -i --from-path src --rosdistro iron -y &&
+                sudo -i -u rosdep install --from-paths src --ignore-src -r -y &&
+                colcon build
+                "
+
+# set user permissions
+chown -R $UNAME:$UNAME /home/$UNAME      # configure home directory
+chmod 755 -R /home/$UNAME  
+
+printf "\n${LGRN}ROS Workspace Built!${NC}\n\n"

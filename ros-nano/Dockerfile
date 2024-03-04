@@ -25,9 +25,15 @@ WORKDIR /home/$UNAME
 COPY setup/nanodeps.install /setup/
 RUN /setup/nanodeps.install
 
+ENV ROBO_HOME /home/$UNAME/iRobotCreate2
+
+# ros workspace build
 COPY setup/kinect.config /setup/
 RUN /setup/kinect.config
-# RUN echo 'hello'
+
+# ros workspace build
+COPY setup/workspace.install /setup/
+RUN /setup/workspace.install
 
 # set user to run container as
 USER $UNAME 

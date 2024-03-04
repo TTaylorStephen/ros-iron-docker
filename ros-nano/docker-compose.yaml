@@ -1,14 +1,16 @@
 version: “3”
 services:
   ros-nano:
-    container_name: steve0
-    image: ros-nano
+    container_name: ros-nano-tester2
+    image: ros-nano:v0.0.1
     stdin_open: true
     tty: true
     privileged: true
+    network_mode: "host"
     environment:
       DISPLAY: $DISPLAY
     volumes:
+      - /dev:/dev
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ~/.Xauthority:/root/.Xauthority
     

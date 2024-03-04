@@ -3,9 +3,7 @@
 ##                                                        ##
 ## TO BUILD:                                              ##
 ##                                                        ##
-## docker build --build-arg UNAME=steve0\                 ##
-##              --build-arg PWORD=steve0\                 ##
-##              -t container:tag .                        ##
+## docker build -t  container:tag . --progress=plain      ##
 ##                                                        ##
 ## TO RUN:                                                ##
 ##                                                        ##
@@ -21,9 +19,11 @@ FROM ubuntu:22.04
 SHELL ["/bin/bash", "-c"]
 
 # install general dependencies 
-COPY setup/deps.install /setup/
-RUN /setup/deps.install
+COPY setup/rosdeps.install /setup/
+RUN /setup/rosdeps.install
 
 # Install ROS via: https://docs.ros.org/en/iron/Installation/Ubuntu-Install-Debians.html
 COPY setup/ros.install /setup/
 RUN /setup/ros.install
+
+CMD ["/bin/bash"]

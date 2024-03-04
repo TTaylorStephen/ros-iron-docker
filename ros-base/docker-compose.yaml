@@ -1,8 +1,8 @@
 version: “3”
 services:
   ros-2-iron:
-    container_name: steve0
-    image: ros-2-iron
+    container_name: ros-2-test
+    image: ros-iron-base:v0.0.1
     stdin_open: true
     tty: true
     environment:
